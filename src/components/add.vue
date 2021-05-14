@@ -58,11 +58,7 @@
             name="country"
           />
         </div> -->
-        <datePicker
-          v-model="formdata.date"
-          format="YYYY"
-          display-format="dddd jDD jMMMM jYYYY "
-        ></datePicker>
+        <datePicker v-model="formdata.date" format="YYYY"></datePicker>
         <button type="submit" class="btn btn-primary my-3">Submit</button>
       </form>
     </div>

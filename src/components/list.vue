@@ -23,7 +23,8 @@
             <td>{{ i + 1 }}</td>
             <td>{{ u.name }}</td>
             <td>{{ u.lastname }}</td>
-            <td>{{ u.date }}</td>
+            <td>{{ now - u.date }}</td>
+
             <td>{{ u.country }}</td>
           </tr>
         </tbody>
@@ -33,6 +34,7 @@
 </template>
 
 <script>
+import moment from "jalali-moment";
 export default {
   props: { userslist: { type: Array } },
   data() {
@@ -53,6 +55,9 @@ export default {
   methods: {},
 
   computed: {
+    now: function () {
+      return moment(moment.now()).format("YYYY");
+    },
     // calculating  the range of games to show in a page (ipage,ilimt)
     // first argument in the range - start
     ipage() {
