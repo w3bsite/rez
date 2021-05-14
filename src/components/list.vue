@@ -23,6 +23,7 @@
             <td>{{ i + 1 }}</td>
             <td>{{ u.name }}</td>
             <td>{{ u.lastname }}</td>
+            <td>{{ u.date }}</td>
             <td>{{ u.country }}</td>
           </tr>
         </tbody>
