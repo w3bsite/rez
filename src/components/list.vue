@@ -1,23 +1,32 @@
 <template>
   <div>
-    list component<br />
-    <div class="container" v-for="(u, i) in localuserslist" :key="i">
-      <div>
-        {{ u.id }}
-      </div>
-      <div>
-        {{ u.name }}
-      </div>
-      <div>
-        {{ u.lastname }}
-      </div>
-      <div>
-        {{ u.country }}
-      </div>
-      <div>
-        {{ u.date }}
-      </div>
-      {{ u.flag }}
+    <ul class="pagination justify-content-center" style="margin: 20px 0">
+      <li v-for="p in itotalpages" :key="p" class="page-item">
+        <button class="page-link" @click="pageNumber = p">{{ p }}</button>
+      </li>
+    </ul>
+    <div class="container">
+      <h2>جدول کاربران</h2>
+
+      <table class="table table-bordered">
+        <thead>
+          <tr>
+            <th>ردیف</th>
+            <th>نام</th>
+            <th>نام خانوادگی</th>
+            <th>سن کاربر</th>
+            <th>کشور</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr v-for="(u, i) in paginatedData" :key="i">
+            <td>{{ i + 1 }}</td>
+            <td>{{ u.name }}</td>
+            <td>{{ u.lastname }}</td>
+            <td>{{ u.country }}</td>
+          </tr>
+        </tbody>
+      </table>
     </div>
   </div>
 </template>
@@ -29,6 +38,9 @@ export default {
     return {
       // users: JSON.parse(localStorage.getItem("userdata")),
       localuserslist: [],
+      pageNumber: 1,
+      limit: 5,
+      size: 10,
     };
   },
   mounted() {
@@ -37,7 +49,34 @@ export default {
     }
     // this.localuserslist = JSON.parse(localStorage.getItem("userdata"));
   },
-  watch: {},
+  methods: {},
+
+  computed: {
+    // calculating  the range of games to show in a page (ipage,ilimt)
+    // first argument in the range - start
+    ipage() {
+      return (this.pageNumber - 1) * this.limit;
+    },
+    // secound argument in the range - end
+    ilimit() {
+      return this.ipage + this.limit;
+    },
+    paginatedData() {
+      return this.userslist.slice(this.ipage, this.ilimit);
+    },
+    // number of games
+    itotal() {
+      if (this.userslist) {
+        return this.userslist.length;
+      } else {
+        return null;
+      }
+    },
+    // number of pages
+    itotalpages() {
+      return this.itotal ? Math.ceil(this.itotal / this.limit) : null;
+    },
+  },
 };
 </script>
 

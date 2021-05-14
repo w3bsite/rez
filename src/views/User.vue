@@ -3,10 +3,9 @@
     <add v-on:add-user-event="adduserItem"></add>
 
     <div class="card bg-primary text-white">
-      parent
-      <div class="card bg-dark text-white" v-for="(u, i) in users" :key="i">
+      <!-- <div class="card bg-dark text-white" v-for="(u, i) in users" :key="i">
         {{ u }}
-      </div>
+      </div> -->
     </div>
     <div class="card bg-secondary text-white">
       <!-- <List ></List> -->
